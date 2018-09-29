@@ -1,0 +1,4 @@
+---
+- name: restart graphite-web
+  service: name=diamond state=restarted
+  when: graphite_web_service

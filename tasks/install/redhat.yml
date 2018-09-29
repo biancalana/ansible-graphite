@@ -1,0 +1,5 @@
+- name: install graphite-web
+  yum: name=graphite-web
+  tags:
+    - graphite
+    - graphite-install

@@ -1,0 +1,14 @@
+# This is /etc/systemd/system/graphite-web.socket
+[Unit]
+Description=graphite-web socket
+
+[Socket]
+{% if graphite_listen_unix %}
+ListenStream={{ graphite_listen_unix }}
+{% endif %}
+{% if graphite_listen_tcp %}
+ListenStream={{ graphite_listen_tcp }}
+{% endif %}
+
+[Install]
+WantedBy=sockets.target

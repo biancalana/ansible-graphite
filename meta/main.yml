@@ -1,0 +1,7 @@
+---
+dependencies:
+  - src: https://gitlab.home/ansible-roles/nginx.git
+    version: 1.0.2
+    name: nginx
+    scm: git
+    when: graphite_use_nginx

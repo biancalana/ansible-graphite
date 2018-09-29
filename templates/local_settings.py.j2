@@ -1,0 +1,75 @@
+#
+# file kept by ansible. do not edit manually
+#
+
+#####################################
+# General Configuration #
+#####################################
+
+SECRET_KEY = '{{ ansible_machine_id }}'
+
+TIME_ZONE = '{{ graphite_time_zone }}'
+
+# Logging
+{% if graphite_log_rotation is defined %}
+LOG_ROTATION = {{ graphite_log_rotation }}
+{% endif %}
+{% if graphite_log_rotation_count is defined %}
+LOG_ROTATION_COUNT = {{ graphite_log_rotation_count }}
+{% endif %}
+{% if graphite_log_rendering_performance is defined %}
+LOG_RENDERING_PERFORMANCE = {{ graphite_log_rendering_performance }}
+{% endif %}
+{% if graphite_log_cahe_performance is defined %}
+LOG_CACHE_PERFORMANCE = {{ graphite_log_cahe_performance }}
+{% endif %}
+
+{% if graphite_debug is defined %}
+DEBUG = {{ graphite_debug }}
+{% endif %}
+
+{% if graphite_memcache_hosts is defined %}
+MEMCACHE_HOSTS = {{ graphite_memcache_hosts }}
+{{% else %}}
+MEMCACHE_HOSTS = []
+{% endif %}
+
+DEFAULT_CACHE_DURATION = {{ graphite_cache_duration }}
+#DEFAULT_CACHE_POLICY = [(0, 60), # default is 60 seconds
+#                        (7200, 120), # >= 2 hour queries are cached 2 minutes
+#                        (21600, 180)] # >= 6 hour queries are cached 3 minutes
+MEMCACHE_KEY_PREFIX = 'graphite'
+
+URL_PREFIX = '{{ graphite_url_prefix }}'
+
+
+#####################################
+# Filesystem Paths #
+#####################################
+GRAPHITE_ROOT = '{{ graphite_path }}'
+
+
+#########################
+# Cluster Configuration #
+#########################
+CLUSTER_SERVERS = {{ graphite_cluster_servers }}
+
+REMOTE_EXCLUDE_LOCAL = {{ graphite_remote_exclude_local }}
+USE_WORKER_POOL = {{ graphite_use_fetch_worker_pool }}
+POOL_MAX_WORKERS = {{ graphite_max_fetch_workers }}
+INTRACLUSTER_HTTPS = {{ graphite_intracluster_https }}
+
+REMOTE_FIND_TIMEOUT = {{ graphite_remote_find_timeout }}
+REMOTE_FETCH_TIMEOUT = {{ graphite_remote_fetch_timeout }}
+REMOTE_PREFETCH_DATA = {{ graphite_remote_prefetch_data }}
+REMOTE_RETRY_DELAY = {{ graphite_remote_retry_delay }}
+MAX_FETCH_RETRIES = {{ graphite_max_fetch_retry }}
+
+FIND_CACHE_DURATION = {{ graphite_find_cache_duration }}
+FIND_TOLERANCE = 2 * FIND_CACHE_DURATION
+
+REMOTE_STORE_USE_POST = {{ graphite_remote_store_use_post }}
+REMOTE_STORE_FORWARD_HEADERS = {{ graphite_remote_store_forward_headers }}
+REMOTE_PREFETCH_DATA = {{ graphite_remote_prefetch_data }}
+
+STORAGE_FINDERS = {{ graphite_storage_finders }}

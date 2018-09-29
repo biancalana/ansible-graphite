@@ -1,0 +1,33 @@
+- name: OS Specific install
+  include: "{{ item }}"
+  with_first_found:
+    - "install/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "install/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "install/{{ ansible_distribution | lower }}.yml"
+    - "install/{{ ansible_os_family | lower }}.yml"
+    - "install/{{ ansible_system | lower }}.yml"
+  tags:
+    - graphite_install
+
+- name: OS Common install
+  include: "install/common.yml"
+  tags:
+    - graphite_install
+
+- name: OS Specific config
+  include: "{{ item }}"
+  with_first_found:
+    - "configure/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "configure/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "configure/{{ ansible_distribution | lower }}.yml"
+    - "configure/{{ ansible_os_family | lower }}.yml"
+    - "configure/{{ ansible_system | lower }}.yml"
+  tags:
+    - graphite_config
+
+- name: Restart graphite-web
+  service: name=graphite-web state=restarted
+  when: config.changed
+
+- name: Start graphite-web
+  service: name=graphite-web state=started
