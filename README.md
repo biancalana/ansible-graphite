@@ -9,7 +9,7 @@ generating graphite-web rpm:
 ```
 # yum install ruby-devel gcc make rpm-build rubygems
 # gem install --no-ri --no-rdoc fpm
-
+# export PATH=$PATH:/usr/local/bin
 # yum install gcc python-dev libffi-devel
 # virtualenv /opt/graphite
 # . /opt/graphite/bin/activate

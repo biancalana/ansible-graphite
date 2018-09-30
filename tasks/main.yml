@@ -23,11 +23,25 @@
     - "configure/{{ ansible_os_family | lower }}.yml"
     - "configure/{{ ansible_system | lower }}.yml"
   tags:
+    - graphite
     - graphite_config
 
+- name: OS Common config
+  include: "configure/common.yml"
+  tags:
+    - graphite
+
 - name: Restart graphite-web
-  service: name=graphite-web state=restarted
+  service:
+    name: "graphite-web"
+    state: restarted
   when: config.changed
+  tags:
+    - graphite
 
 - name: Start graphite-web
-  service: name=graphite-web state=started
+  service:
+    name: "graphite-web"
+    state: started
+  tags:
+    - graphite

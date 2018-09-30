@@ -1,7 +1,7 @@
 - name: systemd socket file
   template:
     src: "graphite-web.socket.j2"
-    dest: "/etc/systemd/system/graphite-web.socket.j2"
+    dest: "/etc/systemd/system/graphite-web.socket"
     owner: "root"
     mode: "0644"
   register: socket_file
@@ -10,14 +10,20 @@
     - graphite-config
 
 - name: systemd service file
-  template: src=graphite-web.service.j2 dest=/etc/systemd/system/graphite-web.service.j2 owner=root mode=0644
+  template:
+    src: "graphite-web.service.j2"
+    dest: "/etc/systemd/system/graphite-web.service"
+    owner: "root"
+    mode: 0644
   register: service_file
   tags:
     - graphite
     - graphite-config
 
 - name: reload systemd
-  systemd: daemon_reload=yes
+  systemd:
+    name: "graphite-web"
+    daemon_reload: "yes"
   when: socket_file.changed or service_file.changed
   tags:
     - graphite

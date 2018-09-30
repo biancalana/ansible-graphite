@@ -30,7 +30,7 @@ DEBUG = {{ graphite_debug }}
 
 {% if graphite_memcache_hosts is defined %}
 MEMCACHE_HOSTS = {{ graphite_memcache_hosts }}
-{{% else %}}
+{% else %}
 MEMCACHE_HOSTS = []
 {% endif %}
 

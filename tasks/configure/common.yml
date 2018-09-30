@@ -4,14 +4,17 @@
     dest: "{{ graphite_path }}/webapp/graphite/local_settings.py"
     owner: "root"
     mode: 0644
-  register: mysql_conf
+  register: config
   notify: restart mysql
   tags:
     - graphite
     - graphite-config
 
 - name: Create sqlite db
-  command: django-admin.py migrate --settings=graphite.settings --run-syncdb chdir={{ graphite_path }} creates={{ graphite_storage_dir }}/graphite.db
+  command: django-admin.py migrate --settings=graphite.settings --run-syncdb
+  args:
+    chdir: "{{ graphite_path }}"
+    creates: "{{ graphite_storage_dir }}/graphite.db"
   environment:
     PATH: "{{ graphite_path}}/bin:{{ ansible_env.PATH }}"
     PYTHONPATH: "{{ graphite_path }}"
