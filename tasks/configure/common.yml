@@ -17,7 +17,7 @@
     creates: "{{ graphite_storage_dir }}/graphite.db"
   environment:
     PATH: "{{ graphite_path}}/bin:{{ ansible_env.PATH }}"
-    PYTHONPATH: "{{ graphite_path }}"
+    PYTHONPATH: "{{ graphite_path }}/webapp"
   tags:
     - graphite
     - graphite-config
