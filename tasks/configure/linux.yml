@@ -28,3 +28,12 @@
   tags:
     - graphite
     - graphite-config
+
+- name: enable graphite-web service
+  systemd:
+    name: "graphite-web"
+    enabled: "yes"
+  when: service_file.changed
+  tags:
+    - graphite
+    - graphite-config
