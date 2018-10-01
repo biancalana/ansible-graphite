@@ -3,8 +3,9 @@
 #graphite_debug: false
 graphite_user: "graphite"
 graphite_path: "/opt/graphite"
-graphite_log_dir: "{{ graphite_path }}/log"
 graphite_storage_dir: "{{ graphite_path }}/storage"
+graphite_log_dir: "{{ graphite_storage_dir }}/log"
+
 graphite_use_nginx: False
 
 graphite_disable_access_log: True
@@ -21,7 +22,7 @@ graphite_storage_finders: "()"
 graphite_use_fetch_worker_pool: True
 graphite_max_fetch_workers: 10
 
-graphite_listen_tcp: http://127.0.0.1:8080
+graphite_listen_tcp: 127.0.0.1:8080
 graphite_listen_unix: False
 graphite_max_connections: 128
 graphite_max_connections_per_child: 512
@@ -44,4 +45,4 @@ graphite_cluster_servers: '["10.0.2.2:80", "10.0.2.3:80"]'
 graphite_memcache_hosts: "['10.10.10.10:11211', '10.10.10.11:11211', '10.10.10.12:11211']"
 
 graphite_cache_duration: 30
-graphite_url_prefix: "/graphite"
+graphite_url_prefix: "/"
