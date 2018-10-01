@@ -14,7 +14,7 @@ generating graphite-web rpm:
 # pip install --upgrade pip
 # virtualenv /tmp/opt/graphite
 # . /tmp/opt/graphite/bin/activate
-# pip install Django cairocffi cffi django-tagging pycparser pyparsing pytz scandir six urllib3
+# pip install Django cairocffi cffi django-tagging pycparser pyparsing pytz scandir six urllib3 gunicorn
 # pip install --install-option="--prefix=/tmp/opt/graphite" --install-option="--install-lib=/tmp/opt/graphite/webapp" graphite-web
 
 # /usr/local/bin/fpm -s dir -t rpm -n graphite-web -v 1.1.4 --description \
