@@ -29,10 +29,21 @@
     - graphite
     - graphite-config
 
-- name: enable graphite-web service
+- name: enable graphite-web.socket
   systemd:
-    name: "graphite-web"
+    name: "graphite-web.socket"
     enabled: "yes"
+    masked: "no"
+  when: socket_file.changed
+  tags:
+    - graphite
+    - graphite-config
+
+- name: enable graphite-web.service
+  systemd:
+    name: "graphite-web.service"
+    enabled: "yes"
+    masked: "no"
   when: service_file.changed
   tags:
     - graphite
