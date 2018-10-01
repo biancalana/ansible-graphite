@@ -4,7 +4,10 @@ Description=graphite-web service
 Requires=graphite-web.socket
 
 [Service]
-ExecStart={{ graphite_path }}/bin/gunicorn -n graphite-web --chdir {{ graphite_path }} -w {{ graphite_web_workers }} {% if graphite_disable_access_log is defined %}--disable-redirect-access-to-syslog{% endif %} {% if graphite_error_logfile is defined %}--error-logfile {{graphite_error_logfile}}{% endif%} --worker-connections {{ graphite_max_connections }} --max-requests {{ graphite_max_connections_per_child }} wsgi:application
+Environment=PATH="{{ graphite_path }}/bin:$PATH"
+Environment=PYTHONPATH={{ graphite_path}}/webapp
+WorkingDirectory={{ graphite_path }}/webapp/graphite
+ExecStart={{ graphite_path }}/bin/python {{ graphite_path }}/bin/gunicorn -n graphite-web -w {{ graphite_web_workers }} {% if graphite_disable_access_log is defined %}--disable-redirect-access-to-syslog{% endif %} {% if graphite_error_logfile is defined %}--error-logfile {{graphite_error_logfile}}{% endif%} --worker-connections {{ graphite_max_connections }} --max-requests {{ graphite_max_connections_per_child }} wsgi:application
 Restart=on-failure
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
