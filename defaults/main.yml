@@ -17,7 +17,7 @@ graphite_log_cahe_performance: False
 
 graphite_time_zone: "GMT"
 
-graphite_storage_finders: "()"
+graphite_storage_finders: "('graphite.finders.remote.RemoteFinder')"
 
 graphite_use_fetch_worker_pool: True
 graphite_max_fetch_workers: 10
@@ -41,8 +41,8 @@ graphite_remote_store_use_post: True
 graphite_remote_store_forward_headers: '["x-org-id"]'
 
 
-graphite_cluster_servers: '["10.0.2.2:80", "10.0.2.3:80"]'
-graphite_memcache_hosts: "['10.10.10.10:11211', '10.10.10.11:11211', '10.10.10.12:11211']"
+graphite_cluster_servers: '[]'
+graphite_memcache_hosts: "[]"
 
 graphite_cache_duration: 30
 graphite_url_prefix: "/"
